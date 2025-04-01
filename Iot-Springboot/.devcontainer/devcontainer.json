@@ -1,0 +1,15 @@
+{
+  "name": "IntelliJ Spring Boot Java App Test",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "..",
+  },
+  "workspaceFolder": "/src",
+  "forwardPorts": [8080, 8081],
+  "remoteUser": "root",
+  "customizations": {
+    "jetbrains": {
+      "backend": "IntelliJ"
+    }
+  }
+}
