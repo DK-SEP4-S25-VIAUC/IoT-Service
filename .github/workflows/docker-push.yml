@@ -20,6 +20,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: ✅ Make mvnw executable (just in case)
+        run: chmod +x ./mvnw
+        working-directory: Iot-Springboot
+
       - name: 🧪 Build and test with Maven
         run: ./mvnw clean verify
         working-directory: Iot-Springboot
