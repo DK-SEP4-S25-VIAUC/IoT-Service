@@ -24,6 +24,11 @@ jobs:
         run: chmod +x mvnw
         working-directory: Iot-Springboot
 
+      - name: ✅ Fix jar permissions
+        run: chmod +x .mvn/wrapper/maven-wrapper.jar
+        working-directory: Iot-Springboot
+
+
       - name: 🧪 Build and package app with Maven
         run: ./mvnw clean package -DskipTests
         working-directory: Iot-Springboot
