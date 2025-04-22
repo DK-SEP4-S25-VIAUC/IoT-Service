@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
 
       - name: ✅ Make mvnw executable (just in case)
-        run: chmod +x ./mvnw
+        run: chmod +x mvnw
         working-directory: Iot-Springboot
 
       - name: 🧪 Build and package app with Maven
