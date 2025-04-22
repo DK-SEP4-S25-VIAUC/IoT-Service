@@ -1,6 +1,6 @@
 Iot-Springboot/HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
+!Iot-Springboot/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
