@@ -1,14 +1,12 @@
-# Use a lightweight JDK base image
 FROM eclipse-temurin:21-jdk-alpine
 
-# Create app directory
 WORKDIR /app
 
-# Copy the fat JAR built by Spring Boot
-COPY target/*.jar app.jar
+# Kopiér det færdige JAR-build fra target-mappen
+COPY ./target/*.jar app.jar
 
-# Expose the port your app runs on
+# Eksponer porten
 EXPOSE 8080
 
-# Run the app
+# Start applikationen
 ENTRYPOINT ["java", "-jar", "app.jar"]
