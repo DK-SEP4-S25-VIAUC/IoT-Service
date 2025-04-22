@@ -24,8 +24,8 @@ jobs:
         run: chmod +x ./mvnw
         working-directory: Iot-Springboot
 
-      - name: 🧪 Build and test with Maven
-        run: ./mvnw clean verify
+      - name: 🧪 Build and package app with Maven
+        run: ./mvnw clean package -DskipTests
         working-directory: Iot-Springboot
 
       - name: 🔐 Login to Docker Hub

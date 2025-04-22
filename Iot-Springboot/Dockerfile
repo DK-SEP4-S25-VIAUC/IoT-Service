@@ -5,7 +5,7 @@ FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
 
 # Copy the fat JAR built by Spring Boot
-COPY target/Iot-Springboot-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar app.jar
 
 # Expose the port your app runs on
 EXPOSE 8080
