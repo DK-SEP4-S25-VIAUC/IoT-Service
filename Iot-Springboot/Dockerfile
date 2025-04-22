@@ -1,24 +1,14 @@
-FROM mcr.microsoft.com/devcontainers/java:21
+# Use a lightweight JDK base image
+FROM eclipse-temurin:21-jdk-alpine
 
-WORKDIR /src
+# Create app directory
+WORKDIR /app
 
-# Install dependencies and configure Git using the build args
-RUN apt-get update && apt-get install -y curl unzip git && rm -rf /var/lib/apt/lists/*
+# Copy the fat JAR built by Spring Boot
+COPY target/Iot-Springboot-0.0.1-SNAPSHOT.jar app.jar
 
-# Install Maven globally :
-RUN curl -fsSL https://apache.osuosl.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz -o /tmp/maven.tar.gz \
-    && tar -xzf /tmp/maven.tar.gz -C /opt \
-    && ln -s /opt/apache-maven-3.9.6 /opt/maven \
-    && rm /tmp/maven.tar.gz
-
-# Set Maven environment variables
-ENV MAVEN_HOME=/opt/maven
-ENV PATH=${MAVEN_HOME}/bin:${PATH}
-
-# Copy all project files into to the image
-COPY . .
-
-#HTTP port
+# Expose the port your app runs on
 EXPOSE 8080
 
-CMD ["/bin/bash"]
+# Run the app
+ENTRYPOINT ["java", "-jar", "app.jar"]
