@@ -1,7 +1,2 @@
 #!/bin/sh
-# ----------------------------------------------------------------------------
-# Maven Wrapper Startup Script
-# ----------------------------------------------------------------------------
-
-DIR="$(cd "$(dirname "$0")" && pwd)"
-exec "$DIR/.mvn/wrapper/maven-wrapper.jar" "$@"
+echo "Maven Wrapper"
