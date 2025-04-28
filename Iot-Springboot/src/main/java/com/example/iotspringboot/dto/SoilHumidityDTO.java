@@ -1,11 +1,14 @@
 package com.example.iotspringboot.dto;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.ZonedDateTime;
 
-public class SoilHumidityDTO
-{
+public class SoilHumidityDTO {
   private int id;
-  private Instant time_stamp;
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Europe/Copenhagen")
+  private ZonedDateTime time_stamp;
+
   private double soil_humidity_value;
 
   public int getId()
@@ -18,12 +21,12 @@ public class SoilHumidityDTO
     this.id = id;
   }
 
-  public Instant getTime_stamp()
+  public ZonedDateTime getTime_stamp()
   {
     return time_stamp;
   }
 
-  public void setTime_stamp(Instant time_stamp)
+  public void setTime_stamp(ZonedDateTime time_stamp)
   {
     this.time_stamp = time_stamp;
   }

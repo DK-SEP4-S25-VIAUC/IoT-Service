@@ -1,11 +1,12 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.CreateSoilHumidityDTO;
+import com.example.iotspringboot.dto.SoilHumidityDTO;
+import com.example.iotspringboot.mapper.SoilHumidityMapper;
 import com.example.iotspringboot.model.SoilHumidity;
 import com.example.iotspringboot.service.SoilHumidityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +28,12 @@ public class SoilHumidityController
   @GetMapping
   public List<SoilHumidity> getAllSoilHumidityReadings() {
     return soilHumidityService.getAllSoilHumidities();
+  }
+
+  @PostMapping
+  public SoilHumidityDTO saveSoilHumidity(@RequestBody CreateSoilHumidityDTO request)
+  {
+    SoilHumidity saved = soilHumidityService.saveSoilHumidity(request);
+    return SoilHumidityMapper.toDTO(saved);
   }
 }

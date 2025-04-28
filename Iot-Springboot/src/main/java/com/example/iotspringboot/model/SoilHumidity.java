@@ -1,11 +1,9 @@
 package com.example.iotspringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 @Entity
 public class SoilHumidity
@@ -16,6 +14,7 @@ public class SoilHumidity
 
   private double soilHumidityValue;
 
+  @Column(nullable = false)
   private Instant timeStamp;
 
   public int getId()
