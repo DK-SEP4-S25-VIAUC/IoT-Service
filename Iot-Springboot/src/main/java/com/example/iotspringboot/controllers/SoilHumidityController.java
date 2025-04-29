@@ -33,6 +33,7 @@ public class SoilHumidityController
   @PostMapping
   public SoilHumidityDTO saveSoilHumidity(@RequestBody CreateSoilHumidityDTO request)
   {
+    System.out.println("Received request: " + request.getSoil_humidity_value());
     SoilHumidity saved = soilHumidityService.saveSoilHumidity(request);
     return SoilHumidityMapper.toDTO(saved);
   }
