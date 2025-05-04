@@ -6,6 +6,7 @@ on:
       - main
       - dev
 
+    paths: 'Iot-Springboot/**'
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
