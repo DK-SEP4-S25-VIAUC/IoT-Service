@@ -1,5 +1,6 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.TemperatureDTO;
 import com.example.iotspringboot.model.Temperature;
 import com.example.iotspringboot.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class TemperatureController
   }
 
   @GetMapping("/latest")
-  public Temperature getLatestTemperature() {
+  public TemperatureDTO getLatestTemperature() {
     return temperatureService.getLatestTemperature();
   }
 
   @GetMapping
-  public List<Temperature> getAllTemperatureReadings() {
+  public List<TemperatureDTO> getAllTemperatureReadings() {
     return temperatureService.getAllTemperatures();
   }
 }

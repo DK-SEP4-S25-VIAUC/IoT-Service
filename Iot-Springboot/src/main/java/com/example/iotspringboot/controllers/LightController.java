@@ -1,5 +1,6 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.LightDTO;
 import com.example.iotspringboot.model.Light;
 import com.example.iotspringboot.service.LightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,12 @@ import java.util.List;
   }
 
   @GetMapping("/latest")
-  public Light getLatestLightReading() {
+  public LightDTO getLatestLightReading() {
     return lightService.getLatestLightReading();
   }
 
   @GetMapping
-  public List<Light> getAllLightReadings() {
+  public List<LightDTO> getAllLightReadings() {
     return lightService.getAllLights();
   }
 }
