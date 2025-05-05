@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Iot-Springboot/pom.xml" />
+        <option value="$PROJECT_DIR$/TCPSocketServer/pom.xml" />
       </list>
     </option>
   </component>

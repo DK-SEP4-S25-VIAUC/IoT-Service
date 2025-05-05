@@ -51,7 +51,7 @@ int main()
     uart_send_string_blocking(USART_0, "WiFi connected!\r\n");
 
     uart_send_string_blocking(USART_0, "Connecting to TCP server...\r\n");
-    wifi_command_create_TCP_connection("4.207.206.251", 5000, NULL, NULL);
+    wifi_command_create_TCP_connection("20.13.198.93", 5000, NULL, NULL);
     uart_send_string_blocking(USART_0, "TCP connection established!\r\n");
 
     wifi_command_TCP_transmit((uint8_t*)"Welcome from SEP4 IoT hardware!\n", 32);
