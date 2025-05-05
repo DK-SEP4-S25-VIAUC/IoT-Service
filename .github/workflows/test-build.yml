@@ -20,17 +20,23 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: 🧪 Build and test Spring Boot app
-        run:
-            chmod +x mvnw
-            ./mvnw clean verify
+      - name: ✅ Gør mvnw eksekverbar
+        run: chmod +x mvnw
         working-directory: Iot-Springboot
 
-      - name: 🧪 Build and test TCP Server app
-        run:
-            chmod +x mvnw
-            ./mvnw clean verify
+      - name: 🧪 Build og test Spring Boot app
+        run: ./mvnw clean verify
+        working-directory: Iot-Springboot
+
+
+      - name: ✅ Gør mvnw eksekverbar
+        run: chmod +x mvnw
         working-directory: TCPSocketServer
+
+      - name: 🧪 Build og test Spring Boot app
+        run: ./mvnw clean verify
+        working-directory: TCPSocketServer
+
 
       - name: 🐍 Set up Python (for PlatformIO)
         uses: actions/setup-python@v5
