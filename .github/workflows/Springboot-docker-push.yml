@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - dev
-
-    paths: 'Iot-Springboot/**'
+    paths:
+      - 'Iot-Springboot/**'
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
