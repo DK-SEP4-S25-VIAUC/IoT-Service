@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/IoT/SoilHumidity")
+@RestController @RequestMapping("/api/iot/soilhumidity")
 public class SoilHumidityController
 {
   private final SoilHumidityService soilHumidityService;
@@ -37,4 +37,6 @@ public class SoilHumidityController
     SoilHumidity saved = soilHumidityService.saveSoilHumidity(request);
     return SoilHumidityMapper.toDTO(saved);
   }
+
+  // TODO: Make a post endpoint threshold
 }

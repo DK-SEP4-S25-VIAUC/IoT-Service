@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/IoT/Light") public class LightController
+@RestController @RequestMapping("/api/iot/light") public class LightController
 {
   private final LightService lightService;
 
