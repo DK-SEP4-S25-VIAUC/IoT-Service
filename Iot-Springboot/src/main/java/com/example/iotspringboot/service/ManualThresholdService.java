@@ -25,10 +25,11 @@ public class ManualThresholdService
   }
 
   public CreateManualThresholdDTO getThreshold() {
-    // Get the threshold (assuming there's only one record)
-    ManualThreshold threshold = manualThresholdRepository.findById(1L).orElseThrow(
-        () -> new RuntimeException("Threshold not set!")
-    );
+    ManualThreshold threshold = manualThresholdRepository
+        .findFirstByOrderByIdDesc()
+        .orElseThrow(() -> new RuntimeException("Threshold not set!"));
+
     return CreateManualThresholdMapper.toDTO(threshold);
   }
+
 }
