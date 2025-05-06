@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/api/iot/manualthreshold")
+@RestController @RequestMapping("/manualthreshold")
 public class ManualThresholdController
 {
   @Autowired

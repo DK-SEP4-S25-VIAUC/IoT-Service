@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/iot/water")
+@RestController @RequestMapping("/water")
 public class WaterController
 {
   private final WaterService waterService;

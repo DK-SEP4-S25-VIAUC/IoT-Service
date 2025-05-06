@@ -43,4 +43,12 @@ public class SampleService
         SampleMapper::toDTO).collect(Collectors.toList());
   }
 
+  public SampleDTO saveSample(SampleDTO sampleDTO)
+  {
+    Sample sample = SampleMapper.toEntity(sampleDTO);
+    sample.setTimeStamp(Instant.now());
+    Sample saved = sampleRepository.save(sample);
+    return SampleMapper.toDTO(saved);
+  }
+
 }

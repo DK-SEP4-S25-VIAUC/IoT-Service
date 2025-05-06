@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/iot/sample")
+@RequestMapping("/sample")
 public class SampleController
 {
   private final SampleService sampleService;
@@ -34,5 +34,10 @@ public class SampleController
     } else {
       return sampleService.getAllSamples();
     }
+  }
+
+  @PostMapping public SampleDTO createSample(@RequestBody SampleDTO sampleDTO)
+  {
+    return sampleService.saveSample(sampleDTO);
   }
 }
