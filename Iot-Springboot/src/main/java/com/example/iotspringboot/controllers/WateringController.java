@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/api/IoT/Watering")
+@RestController @RequestMapping("/api/iot/watering")
 public class WateringController
 {
   @Autowired

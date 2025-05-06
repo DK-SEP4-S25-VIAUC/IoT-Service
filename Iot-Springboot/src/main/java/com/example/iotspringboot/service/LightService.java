@@ -1,11 +1,14 @@
 package com.example.iotspringboot.service;
 
+import com.example.iotspringboot.dto.LightDTO;
+import com.example.iotspringboot.mapper.LightMapper;
 import com.example.iotspringboot.model.Light;
 import com.example.iotspringboot.repository.LightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LightService
@@ -17,12 +20,13 @@ public class LightService
     this.lightRepository = lightRepository;
   }
 
-  public Light getLatestLightReading() {
-    return lightRepository.findTopByOrderByTimeStampDesc();
+  public LightDTO getLatestLightReading() {
+    return LightMapper.toDTO(lightRepository.findTopByOrderByTimeStampDesc());
   }
 
-  public List<Light> getAllLights() {
-    return lightRepository.findAll();
+  public List<LightDTO> getAllLights() {
+    return lightRepository.findAll().stream().map(LightMapper::toDTO).collect(
+        Collectors.toList());
   }
 
 }

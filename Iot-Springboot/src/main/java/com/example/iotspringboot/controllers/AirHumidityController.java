@@ -1,5 +1,6 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.AirHumidityDTO;
 import com.example.iotspringboot.model.AirHumidity;
 import com.example.iotspringboot.service.AirHumidityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/IoT/AirHumidity")
+@RestController @RequestMapping("/api/iot/airhumidity")
 public class AirHumidityController
 {
   private final AirHumidityService airHumidityService;
@@ -20,12 +21,12 @@ public class AirHumidityController
   }
 
   @GetMapping("/latest")
-  public AirHumidity getLatestAirHumidity() {
+  public AirHumidityDTO getLatestAirHumidity() {
     return airHumidityService.getLatestAirHumidity();
   }
 
   @GetMapping
-  public List<AirHumidity> getAllAirHumidityReadings() {
+  public List<AirHumidityDTO> getAllAirHumidityReadings() {
     return airHumidityService.getAllAirHumidities();
   }
 }
