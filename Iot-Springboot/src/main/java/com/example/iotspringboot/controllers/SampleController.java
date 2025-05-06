@@ -1,5 +1,6 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.SampleDTO;
 import com.example.iotspringboot.model.Sample;
 import com.example.iotspringboot.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class SampleController
   }
 
   @GetMapping
-  public List<Sample> getSamples(
+  public List<SampleDTO> getSamples(
       @RequestParam(name = "from", required = false) Instant from,
       @RequestParam(name = "to", required = false) Instant to) {
     if (from != null && to != null) {
