@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/iot/soilhumidity")
+@RestController @RequestMapping("/soilhumidity")
 public class SoilHumidityController
 {
   private final SoilHumidityService soilHumidityService;

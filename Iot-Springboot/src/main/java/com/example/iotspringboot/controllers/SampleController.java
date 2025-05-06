@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/iot/sample")
+@RequestMapping("/sample")
 public class SampleController
 {
   private final SampleService sampleService;

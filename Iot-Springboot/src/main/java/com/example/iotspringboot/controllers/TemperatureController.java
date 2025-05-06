@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/iot/temperature")
+@RestController @RequestMapping("/temperature")
 public class TemperatureController
 {
   private final TemperatureService temperatureService;
