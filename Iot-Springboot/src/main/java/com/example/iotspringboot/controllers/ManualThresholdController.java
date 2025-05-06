@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/manualthreshold")
+@RestController @RequestMapping("/soilhumidity/threshold")
 public class ManualThresholdController
 {
   @Autowired
@@ -20,7 +20,7 @@ public class ManualThresholdController
   }
 
   // Endpoint to get the current threshold
-  @GetMapping("/threshhold")
+  @GetMapping()
   @ResponseStatus(HttpStatus.OK)
   public CreateManualThresholdDTO getThreshold() {
     return manualThresholdService.getThreshold();
