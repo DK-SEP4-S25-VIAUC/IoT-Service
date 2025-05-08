@@ -47,7 +47,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.example.espserver.Main</mainClass>
+                            <mainClass>com.example.TCPServerApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
