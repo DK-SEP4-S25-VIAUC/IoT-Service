@@ -55,7 +55,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com/example/TCPServerApplication.java</mainClass>
+                            <mainClass>com.example.tcpserver.TCPServerApplication.java</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
