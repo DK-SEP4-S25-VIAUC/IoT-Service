@@ -1,8 +1,7 @@
-package com.example;
+package com.example.tcpserver;
 
 import com.example.httpserver.HttpControlServer;
 import com.example.httpserver.HttpForwarder;
-import com.example.tcpserver.TCPServer;
 import com.example.httpserver.MessageBuffer;
 
 import java.io.IOException;
