@@ -1,9 +1,6 @@
 package com.example.iotspringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 
@@ -11,10 +8,15 @@ import java.time.Instant;
 {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
 
-  private double soilHumidity;
-  private double airHumidity;
-  private double airTemperature;
-  private double lightValue;
+  @Column(name = "soil_humidity", nullable = true)
+  private Double soilHumidity;
+  @Column(name = "air_humidity", nullable = true)
+  private Double airHumidity;
+  @Column(name = "air_temperature", nullable = true)
+  private Double airTemperature;
+  @Column(name = "light_value", nullable = true)
+  private Double lightValue;
+  @Column(name = "time_stamp")
   private Instant timeStamp;
 
   public Sample() {}
@@ -38,42 +40,42 @@ import java.time.Instant;
     this.id = id;
   }
 
-  public double getSoilHumidity()
+  public Double getSoilHumidity()
   {
     return soilHumidity;
   }
 
-  public void setSoilHumidity(double soilHumidity)
+  public void setSoilHumidity(Double soilHumidity)
   {
     this.soilHumidity = soilHumidity;
   }
 
-  public double getAirHumidity()
+  public Double getAirHumidity()
   {
     return airHumidity;
   }
 
-  public void setAirHumidity(double airHumidity)
+  public void setAirHumidity(Double airHumidity)
   {
     this.airHumidity = airHumidity;
   }
 
-  public double getAirTemperature()
+  public Double getAirTemperature()
   {
     return airTemperature;
   }
 
-  public void setAirTemperature(double airTemperature)
+  public void setAirTemperature(Double airTemperature)
   {
     this.airTemperature = airTemperature;
   }
 
-  public double getLightValue()
+  public Double getLightValue()
   {
     return lightValue;
   }
 
-  public void setLightValue(double lightValue)
+  public void setLightValue(Double lightValue)
   {
     this.lightValue = lightValue;
   }

@@ -27,6 +27,7 @@ public class TCPServer {
 
       while (true) {
         Socket socket = serverSocket.accept();
+        System.out.println("New connection from " + socket.getRemoteSocketAddress());
         new Thread(() -> handleClient(socket)).start();
       }
     } catch (IOException e) {
@@ -43,22 +44,11 @@ public class TCPServer {
       while ((inputLine = reader.readLine()) != null) {
         System.out.println("Received from ESP-01: " + inputLine);
 
-        String[] pairs = inputLine.split(",");
-        Map<String, String> dataMap = new HashMap<>();
-
-        for (String pair : pairs) {
-          String[] keyValue = pair.split("=");
-          if (keyValue.length == 2) {
-            String key = keyValue[0].trim();
-            String value = keyValue[1].trim();
-            dataMap.put(key, value);
-          }
-        }
-
-        // Byg JSON
-        String jsonPayload = buildJsonFromMap(dataMap);
-        if (jsonPayload != null) {
-          httpForwarder.forwardJson(jsonPayload);
+        // Tjek om input er gyldigt JSON
+        if (isValidJson(inputLine)) {
+          httpForwarder.forwardJson(inputLine);
+        } else {
+          System.err.println("Invalid JSON received: " + inputLine);
         }
 
         // Send evt. besked til ESP-01
@@ -74,23 +64,10 @@ public class TCPServer {
     }
   }
 
-  private String buildJsonFromMap(Map<String, String> map) {
-    if (map.isEmpty()) return null;
-
-    StringBuilder json = new StringBuilder("{");
-    Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-    while (it.hasNext()) {
-      Map.Entry<String, String> entry = it.next();
-      json.append("\"")
-          .append(entry.getKey())
-          .append("\":\"")
-          .append(entry.getValue())
-          .append("\"");
-      if (it.hasNext()) json.append(",");
-    }
-    json.append("}");
-    return json.toString();
+  private boolean isValidJson(String json) {
+    return json.trim().startsWith("{") && json.trim().endsWith("}");
   }
+
 
 }
 

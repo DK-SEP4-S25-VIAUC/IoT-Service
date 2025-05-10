@@ -2,15 +2,15 @@ package com.example.iotspringboot.dto;
 
 public class WateringDTO {
 
-  private double waterAmount;
+  private double water_amount;
 
-  public double getWaterAmount()
+  public double getWater_amount()
   {
-    return waterAmount;
+    return water_amount;
   }
 
-  public void setWaterAmount(double waterAmount)
+  public void setWater_amount(double water_amount)
   {
-    this.waterAmount = waterAmount;
+    this.water_amount = water_amount;
   }
 }

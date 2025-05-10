@@ -5,9 +5,9 @@ import java.time.Instant;
 public class WaterDTO
 {
   private int id;
-  private Instant timestamp;
-  private double waterLevel;
-  private double wateredAmount;
+  private Instant time_stamp;
+  private double water_level;
+  private double watered_amount;
 
   public int getId()
   {
@@ -21,31 +21,31 @@ public class WaterDTO
 
   public Instant getTimestamp()
   {
-    return timestamp;
+    return time_stamp;
   }
 
   public void setTimestamp(Instant timestamp)
   {
-    this.timestamp = timestamp;
+    this.time_stamp = timestamp;
   }
 
-  public double getWaterLevel()
+  public double getWater_level()
   {
-    return waterLevel;
+    return water_level;
   }
 
-  public void setWaterLevel(double waterLevel)
+  public void setWater_level(double water_level)
   {
-    this.waterLevel = waterLevel;
+    this.water_level = water_level;
   }
 
-  public double getWateredAmount()
+  public double getWatered_amount()
   {
-    return wateredAmount;
+    return watered_amount;
   }
 
-  public void setWateredAmount(double wateredAmount)
+  public void setWatered_amount(double watered_amount)
   {
-    this.wateredAmount = wateredAmount;
+    this.watered_amount = watered_amount;
   }
 }

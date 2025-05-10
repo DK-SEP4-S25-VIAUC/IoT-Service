@@ -9,8 +9,8 @@ public class WaterMapper
     WaterDTO dto = new WaterDTO();
     dto.setId(water.getId());
     dto.setTimestamp(water.getTimeStamp());
-    dto.setWaterLevel(water.getWaterLevel());
-    dto.setWateredAmount(water.getWateredAmount());
+    dto.setWater_level(water.getWaterLevel());
+    dto.setWatered_amount(water.getWateredAmount());
     return dto;
   }
 
@@ -18,8 +18,8 @@ public class WaterMapper
     Water water = new Water();
     water.setId(dto.getId());
     water.setTimeStamp(dto.getTimestamp());
-    water.setWaterLevel(dto.getWaterLevel());
-    water.setWateredAmount(dto.getWateredAmount());
+    water.setWaterLevel(dto.getWater_level());
+    water.setWateredAmount(dto.getWatered_amount());
     return water;
   }
 }

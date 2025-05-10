@@ -14,6 +14,7 @@ public class AirHumidity
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+
   private double airHumidityValue;
 
   private Instant timeStamp;
