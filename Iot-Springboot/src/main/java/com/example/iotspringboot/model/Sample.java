@@ -1,9 +1,6 @@
 package com.example.iotspringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 
@@ -11,10 +8,15 @@ import java.time.Instant;
 {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
 
+  @Column(name = "soil_humidity", nullable = true)
   private Double soilHumidity;
+  @Column(name = "air_humidity", nullable = true)
   private Double airHumidity;
+  @Column(name = "air_temperature", nullable = true)
   private Double airTemperature;
+  @Column(name = "light_value", nullable = true)
   private Double lightValue;
+  @Column(name = "air_humidity", nullable = true)
   private Instant timeStamp;
 
   public Sample() {}

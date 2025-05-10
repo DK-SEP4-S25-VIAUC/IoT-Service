@@ -1,15 +1,24 @@
 package com.example.iotspringboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.Instant;
 
 public class SampleDTO
 {
   private int id;
-  private Double soil_humidity;
-  private Double air_humidity;
-  private Double air_temperature;
-  private Double light_value;
-  private Instant time_stamp;
+  @JsonProperty("soil_humidity")
+  private Double soilHumidity;
+
+  @JsonProperty("air_humidity")
+  private Double airHumidity;
+
+  @JsonProperty("air_temperature")
+  private Double airTemperature;
+
+  @JsonProperty("light_value")
+  private Double lightValue;
+  private Instant timestamp;
 
   public int getId()
   {
@@ -21,53 +30,53 @@ public class SampleDTO
     this.id = id;
   }
 
-  public Double getSoil_humidity()
+  public Double getSoilHumidity()
   {
-    return soil_humidity;
+    return soilHumidity;
   }
 
-  public void setSoil_humidity(Double soil_humidity)
+  public void setSoilHumidity(Double soilHumidity)
   {
-    this.soil_humidity = soil_humidity;
+    this.soilHumidity = soilHumidity;
   }
 
-  public Double getAir_humidity()
+  public Double getAirHumidity()
   {
-    return air_humidity;
+    return airHumidity;
   }
 
-  public void setAir_humidity(Double air_humidity)
+  public void setAirHumidity(Double airHumidity)
   {
-    this.air_humidity = air_humidity;
+    this.airHumidity = airHumidity;
   }
 
   public Double getAir_temperature()
   {
-    return air_temperature;
+    return airTemperature;
   }
 
   public void setAir_temperature(Double air_temperature)
   {
-    this.air_temperature = air_temperature;
+    this.airTemperature = air_temperature;
   }
 
-  public Double getLight_value()
+  public Double getLightValue()
   {
-    return light_value;
+    return lightValue;
   }
 
-  public void setLight_value(Double light_value)
+  public void setLightValue(Double lightValue)
   {
-    this.light_value = light_value;
+    this.lightValue = lightValue;
   }
 
-  public Instant getTime_stamp()
+  public Instant getTimestamp()
   {
-    return time_stamp;
+    return timestamp;
   }
 
-  public void setTime_stamp(Instant time_stamp)
+  public void setTimestamp(Instant timestamp)
   {
-    this.time_stamp = time_stamp;
+    this.timestamp = timestamp;
   }
 }
