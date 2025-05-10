@@ -16,7 +16,7 @@ import java.time.Instant;
   private Double airTemperature;
   @Column(name = "light_value", nullable = true)
   private Double lightValue;
-  @Column(name = "air_humidity", nullable = true)
+  @Column(name = "time_stamp")
   private Instant timeStamp;
 
   public Sample() {}
