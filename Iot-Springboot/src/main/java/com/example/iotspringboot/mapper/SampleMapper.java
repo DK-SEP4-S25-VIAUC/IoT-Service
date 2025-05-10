@@ -10,7 +10,7 @@ public class SampleMapper
     dto.setId(sample.getId());
     dto.setSoilHumidity(sample.getSoilHumidity());
     dto.setAirHumidity(sample.getAirHumidity());
-    dto.setAir_temperature(sample.getAirTemperature());
+    dto.setAirTemperature(sample.getAirTemperature());
     dto.setLightValue(sample.getLightValue());
     dto.setTimestamp(sample.getTimeStamp());
     return dto;
@@ -21,7 +21,7 @@ public class SampleMapper
     sample.setId(dto.getId());
     sample.setSoilHumidity(dto.getSoilHumidity());
     sample.setAirHumidity(dto.getAirHumidity());
-    sample.setAirTemperature(dto.getAir_temperature());
+    sample.setAirTemperature(dto.getAirTemperature());
     sample.setLightValue(dto.getLightValue());
     sample.setTimeStamp(dto.getTimestamp());
     return sample;
