@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Instant;
 
-public class SampleDTO
-{
+public class SampleDTO {
   private int id;
+
   @JsonProperty("soil_humidity")
   private Double soilHumidity;
 
@@ -18,65 +18,54 @@ public class SampleDTO
 
   @JsonProperty("light_value")
   private Double lightValue;
+
   private Instant timestamp;
 
-  public int getId()
-  {
+  public int getId() {
     return id;
   }
 
-  public void setId(int id)
-  {
+  public void setId(int id) {
     this.id = id;
   }
 
-  public Double getSoilHumidity()
-  {
+  public Double getSoilHumidity() {
     return soilHumidity;
   }
 
-  public void setSoilHumidity(Double soilHumidity)
-  {
+  public void setSoilHumidity(Double soilHumidity) {
     this.soilHumidity = soilHumidity;
   }
 
-  public Double getAirHumidity()
-  {
+  public Double getAirHumidity() {
     return airHumidity;
   }
 
-  public void setAirHumidity(Double airHumidity)
-  {
+  public void setAirHumidity(Double airHumidity) {
     this.airHumidity = airHumidity;
   }
 
-  public Double getAir_temperature()
-  {
+  public Double getAirTemperature() {
     return airTemperature;
   }
 
-  public void setAir_temperature(Double air_temperature)
-  {
-    this.airTemperature = air_temperature;
+  public void setAirTemperature(Double airTemperature) {
+    this.airTemperature = airTemperature;
   }
 
-  public Double getLightValue()
-  {
+  public Double getLightValue() {
     return lightValue;
   }
 
-  public void setLightValue(Double lightValue)
-  {
+  public void setLightValue(Double lightValue) {
     this.lightValue = lightValue;
   }
 
-  public Instant getTimestamp()
-  {
+  public Instant getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Instant timestamp)
-  {
+  public void setTimestamp(Instant timestamp) {
     this.timestamp = timestamp;
   }
 }
