@@ -27,6 +27,7 @@ public class TCPServer {
 
       while (true) {
         Socket socket = serverSocket.accept();
+        System.out.println("New connection from " + socket.getRemoteSocketAddress());
         new Thread(() -> handleClient(socket)).start();
       }
     } catch (IOException e) {

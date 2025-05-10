@@ -8,7 +8,7 @@ public class HttpForwarder {
 
   public void forwardJson(String json) {
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("https://https://iot-service-api.gentlepond-0bd2f955.northeurope.azurecontainerapps.io/api/iot/sample"))
+        .uri(URI.create("https://https://iot-service-api.gentlepond-0bd2f955.northeurope.azurecontainerapps.io/sample"))
         .header("Content-Type", "application/json")
         .POST(HttpRequest.BodyPublishers.ofString(json))
         .build();
