@@ -5,11 +5,11 @@ import java.time.Instant;
 public class SampleDTO
 {
   private int id;
-  private double soilHumidity;
-  private double airHumidity;
-  private double airTemperature;
-  private double lightValue;
-  private Instant timestamp;
+  private Double soil_humidity;
+  private Double air_humidity;
+  private Double air_temperature;
+  private Double light_value;
+  private Instant time_stamp;
 
   public int getId()
   {
@@ -21,53 +21,53 @@ public class SampleDTO
     this.id = id;
   }
 
-  public double getSoilHumidity()
+  public Double getSoil_humidity()
   {
-    return soilHumidity;
+    return soil_humidity;
   }
 
-  public void setSoilHumidity(double soilHumidity)
+  public void setSoil_humidity(Double soil_humidity)
   {
-    this.soilHumidity = soilHumidity;
+    this.soil_humidity = soil_humidity;
   }
 
-  public double getAirHumidity()
+  public Double getAir_humidity()
   {
-    return airHumidity;
+    return air_humidity;
   }
 
-  public void setAirHumidity(double airHumidity)
+  public void setAir_humidity(Double air_humidity)
   {
-    this.airHumidity = airHumidity;
+    this.air_humidity = air_humidity;
   }
 
-  public double getAirTemperature()
+  public Double getAir_temperature()
   {
-    return airTemperature;
+    return air_temperature;
   }
 
-  public void setAirTemperature(double airTemperature)
+  public void setAir_temperature(Double air_temperature)
   {
-    this.airTemperature = airTemperature;
+    this.air_temperature = air_temperature;
   }
 
-  public double getLightValue()
+  public Double getLight_value()
   {
-    return lightValue;
+    return light_value;
   }
 
-  public void setLightValue(double lightValue)
+  public void setLight_value(Double light_value)
   {
-    this.lightValue = lightValue;
+    this.light_value = light_value;
   }
 
-  public Instant getTimestamp()
+  public Instant getTime_stamp()
   {
-    return timestamp;
+    return time_stamp;
   }
 
-  public void setTimestamp(Instant timestamp)
+  public void setTime_stamp(Instant time_stamp)
   {
-    this.timestamp = timestamp;
+    this.time_stamp = time_stamp;
   }
 }

@@ -8,7 +8,7 @@ public class AirHumidityMapper
   public static AirHumidityDTO toDTO(AirHumidity airHumidity) {
     AirHumidityDTO dto = new AirHumidityDTO();
     dto.setId(airHumidity.getId());
-    dto.setTimestamp(airHumidity.getTimeStamp());
+    dto.setTime_stamp(airHumidity.getTimeStamp());
     dto.setAirHumidityValue(airHumidity.getAirHumidityValue());
     return dto;
   }
@@ -16,7 +16,7 @@ public class AirHumidityMapper
   public static AirHumidity toEntity(AirHumidityDTO dto) {
     AirHumidity airHumidity = new AirHumidity();
     airHumidity.setId(dto.getId());
-    airHumidity.setTimeStamp(dto.getTimestamp());
+    airHumidity.setTimeStamp(dto.getTime_stamp());
     airHumidity.setAirHumidityValue(dto.getAirHumidityValue());
     return airHumidity;
   }

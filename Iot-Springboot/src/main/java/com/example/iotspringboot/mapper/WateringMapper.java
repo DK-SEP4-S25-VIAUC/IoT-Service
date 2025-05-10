@@ -7,13 +7,13 @@ public class WateringMapper
 {
   public static WateringDTO toDTO(Watering watering) {
     WateringDTO dto = new WateringDTO();
-    dto.setWaterAmount(watering.getWaterAmount());
+    dto.setWater_amount(watering.getWaterAmount());
     return dto;
   }
 
   public static Watering toEntity(WateringDTO dto) {
     Watering watering = new Watering();
-    watering.setWaterAmount(dto.getWaterAmount());
+    watering.setWaterAmount(dto.getWater_amount());
     return watering;
   }
 }
