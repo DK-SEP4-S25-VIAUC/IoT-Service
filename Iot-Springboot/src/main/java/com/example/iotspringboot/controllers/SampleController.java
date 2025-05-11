@@ -35,4 +35,9 @@ public class SampleController
       return sampleService.getAllSamples();
     }
   }
+
+  @PostMapping public SampleDTO createSample(@RequestBody SampleDTO sampleDTO)
+  {
+    return sampleService.saveSample(sampleDTO);
+  }
 }

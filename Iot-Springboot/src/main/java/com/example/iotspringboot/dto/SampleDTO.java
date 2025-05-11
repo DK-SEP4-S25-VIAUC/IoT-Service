@@ -1,73 +1,71 @@
 package com.example.iotspringboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.Instant;
 
-public class SampleDTO
-{
+public class SampleDTO {
   private int id;
-  private double soilHumidity;
-  private double airHumidity;
-  private double airTemperature;
-  private double lightValue;
+
+  @JsonProperty("soil_humidity")
+  private Double soilHumidity;
+
+  @JsonProperty("air_humidity")
+  private Double airHumidity;
+
+  @JsonProperty("air_temperature")
+  private Double airTemperature;
+
+  @JsonProperty("light_value")
+  private Double lightValue;
+
   private Instant timestamp;
 
-  public int getId()
-  {
+  public int getId() {
     return id;
   }
 
-  public void setId(int id)
-  {
+  public void setId(int id) {
     this.id = id;
   }
 
-  public double getSoilHumidity()
-  {
+  public Double getSoilHumidity() {
     return soilHumidity;
   }
 
-  public void setSoilHumidity(double soilHumidity)
-  {
+  public void setSoilHumidity(Double soilHumidity) {
     this.soilHumidity = soilHumidity;
   }
 
-  public double getAirHumidity()
-  {
+  public Double getAirHumidity() {
     return airHumidity;
   }
 
-  public void setAirHumidity(double airHumidity)
-  {
+  public void setAirHumidity(Double airHumidity) {
     this.airHumidity = airHumidity;
   }
 
-  public double getAirTemperature()
-  {
+  public Double getAirTemperature() {
     return airTemperature;
   }
 
-  public void setAirTemperature(double airTemperature)
-  {
+  public void setAirTemperature(Double airTemperature) {
     this.airTemperature = airTemperature;
   }
 
-  public double getLightValue()
-  {
+  public Double getLightValue() {
     return lightValue;
   }
 
-  public void setLightValue(double lightValue)
-  {
+  public void setLightValue(Double lightValue) {
     this.lightValue = lightValue;
   }
 
-  public Instant getTimestamp()
-  {
+  public Instant getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Instant timestamp)
-  {
+  public void setTimestamp(Instant timestamp) {
     this.timestamp = timestamp;
   }
 }

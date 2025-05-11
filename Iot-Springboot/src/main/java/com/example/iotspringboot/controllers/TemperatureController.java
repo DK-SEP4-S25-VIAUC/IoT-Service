@@ -20,7 +20,7 @@ public class TemperatureController
   }
 
   @GetMapping("/latest")
-  public TemperatureDTO getLatestReading() {
+  public TemperatureDTO getLatestTemperature() {
     return temperatureService.getLatestTemperature();
   }
 

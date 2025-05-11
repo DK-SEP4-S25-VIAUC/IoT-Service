@@ -5,8 +5,8 @@ import java.time.Instant;
 public class LightDTO
 {
   private int id;
-  private Instant timestamp;
-  private double lightValue;
+  private Instant time_stamp;
+  private double light_value;
 
   public int getId()
   {
@@ -18,23 +18,23 @@ public class LightDTO
     this.id = id;
   }
 
-  public Instant getTimestamp()
+  public Instant getTime_stamp()
   {
-    return timestamp;
+    return time_stamp;
   }
 
-  public void setTimestamp(Instant timestamp)
+  public void setTime_stamp(Instant time_stamp)
   {
-    this.timestamp = timestamp;
+    this.time_stamp = time_stamp;
   }
 
-  public double getLightValue()
+  public double getLight_value()
   {
-    return lightValue;
+    return light_value;
   }
 
-  public void setLightValue(double lightValue)
+  public void setLight_value(double light_value)
   {
-    this.lightValue = lightValue;
+    this.light_value = light_value;
   }
 }
