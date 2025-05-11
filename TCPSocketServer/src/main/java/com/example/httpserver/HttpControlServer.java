@@ -1,5 +1,6 @@
 package com.example.httpserver;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.*;
 
 import java.io.*;
@@ -17,16 +18,32 @@ public class HttpControlServer {
 
   public void start() throws IOException {
     HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-    server.createContext("/sendToEsp", exchange -> {
+    server.createContext("/sendtoesp", exchange -> {
       if ("POST".equals(exchange.getRequestMethod())) {
-        String body = new String(exchange.getRequestBody().readAllBytes());
-        buffer.storeMessage(body);
-        System.out.println("Stored message: " + body);
-        exchange.sendResponseHeaders(200, 0);
-        exchange.getResponseBody().write("OK".getBytes());
-        exchange.getResponseBody().close();
+        try {
+          // Læs og parse JSON med ObjectMapper
+          ObjectMapper mapper = new ObjectMapper();
+          Object jsonObject = mapper.readValue(exchange.getRequestBody(), Object.class);
+
+          // Konverter til kompakt (én-linjers) JSON
+          String compactJson = mapper.writeValueAsString(jsonObject);
+
+          // Gem beskeden
+          buffer.storeMessage(compactJson);
+          System.out.println("Stored JSON message: " + compactJson);
+
+          // Send svar
+          String response = "JSON message stored for ESP-01";
+          exchange.sendResponseHeaders(200, response.getBytes().length);
+          exchange.getResponseBody().write(response.getBytes());
+        } catch (Exception e) {
+          e.printStackTrace();
+          exchange.sendResponseHeaders(500, 0);
+        } finally {
+          exchange.getResponseBody().close();
+        }
       } else {
-        exchange.sendResponseHeaders(405, -1);
+        exchange.sendResponseHeaders(405, -1); // Method Not Allowed
       }
     });
 
