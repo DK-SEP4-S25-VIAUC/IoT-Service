@@ -40,7 +40,7 @@ class HttpControlServerTest {
 
   @Test
   void testSendToEspEndpointStoresMessage() throws Exception {
-    URL url = new URL("http://localhost:8085/sendToEsp");
+    URL url = new URL("http://localhost:8085/sendtoesp");
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
     connection.setRequestMethod("POST");
