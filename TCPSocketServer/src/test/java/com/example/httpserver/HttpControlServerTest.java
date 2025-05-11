@@ -45,18 +45,20 @@ class HttpControlServerTest {
 
     connection.setRequestMethod("POST");
     connection.setDoOutput(true);
-    connection.setRequestProperty("Content-Type", "text/plain");
+    connection.setRequestProperty("Content-Type", "application/json");
 
-    String message = "test-message";
+    String jsonMessage = "{\"command\":\"action\",\"value\":50}";
+
     try (OutputStream os = connection.getOutputStream()) {
-      os.write(message.getBytes());
+      os.write(jsonMessage.getBytes());
       os.flush();
     }
 
     int responseCode = connection.getResponseCode();
     assertEquals(200, responseCode);
 
-    // Bekræft at beskeden er gemt i buffer
-    assertEquals(message, messageBuffer.retrieveMessage());
+    // Bekræft at beskeden er gemt som kompakt JSON
+    assertEquals(jsonMessage, messageBuffer.retrieveMessage());
   }
+
 }
