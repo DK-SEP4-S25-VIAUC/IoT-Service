@@ -21,6 +21,7 @@ public class HttpControlServer {
     server.createContext("/sendtoesp", exchange -> {
       if ("POST".equals(exchange.getRequestMethod())) {
         try {
+
           // Læs og parse JSON med ObjectMapper
           ObjectMapper mapper = new ObjectMapper();
           Object jsonObject = mapper.readValue(exchange.getRequestBody(), Object.class);
