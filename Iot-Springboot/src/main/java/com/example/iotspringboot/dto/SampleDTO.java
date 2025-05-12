@@ -21,6 +21,8 @@ public class SampleDTO {
 
   private Instant timestamp;
 
+  private Double lower_threshold;
+
   public int getId() {
     return id;
   }
@@ -67,5 +69,15 @@ public class SampleDTO {
 
   public void setTimestamp(Instant timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public Double getLower_threshold()
+  {
+    return lower_threshold;
+  }
+
+  public void setLower_threshold(Double lower_threshold)
+  {
+    this.lower_threshold = lower_threshold;
   }
 }

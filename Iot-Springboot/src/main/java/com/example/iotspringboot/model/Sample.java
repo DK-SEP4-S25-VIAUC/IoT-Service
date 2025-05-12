@@ -18,15 +18,18 @@ import java.time.Instant;
   private Double lightValue;
   @Column(name = "time_stamp")
   private Instant timeStamp;
+  @Column(name = "lower_threshold", nullable = true)
+  private Double lower_threshold;
 
   public Sample() {}
 
-  public Sample(double soilHumidity, double airHumidity, double airTemperature, double lightValue, Instant timeStamp) {
+  public Sample(double soilHumidity, double airHumidity, double airTemperature, double lightValue, Instant timeStamp, double lower_threshold) {
     this.soilHumidity = soilHumidity;
     this.airHumidity = airHumidity;
     this.airTemperature = airTemperature;
     this.lightValue = lightValue;
     this.timeStamp = timeStamp;
+    this.lower_threshold = lower_threshold;
   }
 
 
@@ -78,6 +81,16 @@ import java.time.Instant;
   public void setLightValue(Double lightValue)
   {
     this.lightValue = lightValue;
+  }
+
+  public Double getLower_threshold()
+  {
+    return lower_threshold;
+  }
+
+  public void setLower_threshold(Double lower_threshold)
+  {
+    this.lower_threshold = lower_threshold;
   }
 
   public Instant getTimeStamp()
