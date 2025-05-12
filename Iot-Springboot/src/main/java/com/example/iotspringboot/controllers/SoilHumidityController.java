@@ -3,13 +3,12 @@ package com.example.iotspringboot.controllers;
 import com.example.iotspringboot.dto.CreateManualThresholdDTO;
 import com.example.iotspringboot.dto.CreateSoilHumidityDTO;
 import com.example.iotspringboot.dto.SoilHumidityDTO;
-import com.example.iotspringboot.mapper.SoilHumidityMapper;
-import com.example.iotspringboot.model.SoilHumidity;
 import com.example.iotspringboot.service.ManualThresholdService;
 import com.example.iotspringboot.service.SoilHumidityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController @RequestMapping("/soilhumidity")
@@ -40,6 +39,22 @@ public class SoilHumidityController
   {
     System.out.println("Received request: " + request.getSoil_humidity_value());
     return soilHumidityService.saveSoilHumidity(request);
+  }
+
+  @GetMapping public List<SoilHumidityDTO> getSoilHumidityBetweenTimestamps(
+      @RequestParam(name = "from", required = false) Instant from,
+      @RequestParam(name = "to", required = false) Instant to)
+  {
+    if (from != null && to != null) {
+      return soilHumidityService.getSoilHumiditiesBetweenTimestamps(from, to);
+    } else if (from != null) {
+      return soilHumidityService.getSoilHumidityAfterTimestamp(from);
+    } else if (to != null) {
+      return soilHumidityService.getSoilHumidityBeforeTimestamp(to);
+    } else {
+      return soilHumidityService.getAllSoilHumidities();
+    }
+
   }
 
   // TODO: Make a post endpoint threshold
