@@ -4,9 +4,7 @@ import com.example.iotspringboot.dto.WaterDTO;
 import com.example.iotspringboot.model.Water;
 import com.example.iotspringboot.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +27,10 @@ public class WaterController
   public List<WaterDTO> getAllWaterReadings() {
     return waterService.getAllWaters();
   }
+
+  @PostMapping("/manual") public WaterDTO addManualWater(@RequestBody WaterDTO waterDTO)
+  {
+    return waterService.addWater(waterDTO);
+  }
+
 }
