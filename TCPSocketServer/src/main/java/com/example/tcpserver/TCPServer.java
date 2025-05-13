@@ -22,6 +22,7 @@ public class TCPServer {
   }
 
   public void start() {
+
     try (ServerSocket serverSocket = new ServerSocket(port)) {
       System.out.println("TCP Server listening on port " + port);
 
