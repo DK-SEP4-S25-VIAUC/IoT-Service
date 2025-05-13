@@ -30,31 +30,36 @@ public class SoilHumidityController
   }
 
   @GetMapping
-  public List<SoilHumidityDTO> getAllSoilHumidityReadings() {
+  public List<SoilHumidityDTO> getSoilHumidity(
+      @RequestParam(value = "from", required = false) Instant from,
+      @RequestParam(value = "to", required = false) Instant to) {
+
+    // Hent mellem tidsstempler, hvis begge parametre er til stede
+    if (from != null && to != null) {
+      return soilHumidityService.getSoilHumiditiesBetweenTimestamps(from, to);
+    }
+
+    // Hent fra `from` og fremad, hvis kun `from` er angivet
+    if (from != null) {
+      return soilHumidityService.getSoilHumidityAfterTimestamp(from);
+    }
+
+    // Hent indtil `to`, hvis kun `to` er angivet
+    if (to != null) {
+      return soilHumidityService.getSoilHumidityBeforeTimestamp(to);
+    }
+
+    // Returnér alle målinger, hvis ingen parametre er angivet
     return soilHumidityService.getAllSoilHumidities();
   }
+
+
 
   @PostMapping
   public SoilHumidityDTO saveSoilHumidity(@RequestBody CreateSoilHumidityDTO request)
   {
     System.out.println("Received request: " + request.getSoil_humidity_value());
     return soilHumidityService.saveSoilHumidity(request);
-  }
-
-  @GetMapping public List<SoilHumidityDTO> getSoilHumidityBetweenTimestamps(
-      @RequestParam(name = "from", required = false) Instant from,
-      @RequestParam(name = "to", required = false) Instant to)
-  {
-    if (from != null && to != null) {
-      return soilHumidityService.getSoilHumiditiesBetweenTimestamps(from, to);
-    } else if (from != null) {
-      return soilHumidityService.getSoilHumidityAfterTimestamp(from);
-    } else if (to != null) {
-      return soilHumidityService.getSoilHumidityBeforeTimestamp(to);
-    } else {
-      return soilHumidityService.getAllSoilHumidities();
-    }
-
   }
 
   // TODO: Make a post endpoint threshold
