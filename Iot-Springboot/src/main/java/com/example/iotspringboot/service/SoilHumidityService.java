@@ -3,6 +3,7 @@ package com.example.iotspringboot.service;
 import com.example.iotspringboot.dto.CreateSoilHumidityDTO;
 import com.example.iotspringboot.dto.SoilHumidityDTO;
 import com.example.iotspringboot.mapper.SoilHumidityMapper;
+import com.example.iotspringboot.model.Sample;
 import com.example.iotspringboot.model.SoilHumidity;
 import com.example.iotspringboot.repository.SoilHumidityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,27 @@ public class SoilHumidityService
     return SoilHumidityMapper.toDTO(saved);
 
   }
+
+  public List<SoilHumidityDTO> getSoilHumiditiesBetweenTimestamps(Instant from,
+      Instant to)
+  {
+    List<SoilHumidity> soilHumidities = soilHumidityRepository.findByTimeStampBetween(from, to);
+    return soilHumidities.stream().map(SoilHumidityMapper::toDTO).collect(Collectors.toList());
+  }
+
+  public List<SoilHumidityDTO> getSoilHumidityAfterTimestamp(Instant from) {
+    return soilHumidityRepository.findByTimeStampAfter(from).stream()
+        .map(SoilHumidityMapper::toDTO)
+        .collect(Collectors.toList());
+  }
+
+  public List<SoilHumidityDTO> getSoilHumidityBeforeTimestamp(Instant to) {
+    return soilHumidityRepository.findByTimeStampBefore(to).stream()
+        .map(SoilHumidityMapper::toDTO)
+        .collect(Collectors.toList());
+  }
+
+
 
 
 }
