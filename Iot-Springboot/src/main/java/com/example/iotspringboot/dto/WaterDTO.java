@@ -6,7 +6,7 @@ public class WaterDTO
 {
   private int id;
   private Instant time_stamp;
-  private double water_level;
+  private Double water_level;
   private double watered_amount;
 
   public int getId()

@@ -1,9 +1,6 @@
 package com.example.iotspringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 
@@ -15,8 +12,11 @@ public class Water
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  private double waterLevel;
+  @Column(name = "water_level", nullable = true)
+  private Double waterLevel;
+  @Column(name = "watered_amount")
   private double wateredAmount;
+  @Column(name = "time_stamp")
   private Instant timeStamp;
 
   public int getId()
@@ -34,7 +34,7 @@ public class Water
     return waterLevel;
   }
 
-  public void setWaterLevel(double waterLevel)
+  public void setWaterLevel(Double waterLevel)
   {
     this.waterLevel = waterLevel;
   }
