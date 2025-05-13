@@ -15,7 +15,7 @@ public class Water
   @Column(name = "water_level", nullable = true)
   private Double waterLevel;
   @Column(name = "watered_amount")
-  private double wateredAmount;
+  private Double wateredAmount;
   @Column(name = "time_stamp")
   private Instant timeStamp;
 
@@ -29,7 +29,7 @@ public class Water
     this.id = id;
   }
 
-  public double getWaterLevel()
+  public Double getWaterLevel()
   {
     return waterLevel;
   }
@@ -39,7 +39,7 @@ public class Water
     this.waterLevel = waterLevel;
   }
 
-  public double getWateredAmount()
+  public Double getWateredAmount()
   {
     return wateredAmount;
   }
