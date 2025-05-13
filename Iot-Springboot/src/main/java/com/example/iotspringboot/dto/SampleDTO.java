@@ -1,10 +1,17 @@
 package com.example.iotspringboot.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.time.Instant;
-
+@JsonPropertyOrder(
+    {
+        "id", "soil_humidity", "air_humidity", "air_temperature", "light_value", "timestamp", "lower_threshold"
+    }
+)
 public class SampleDTO {
+
+
   private int id;
 
   @JsonProperty("soil_humidity")
@@ -20,6 +27,8 @@ public class SampleDTO {
   private Double lightValue;
 
   private Instant timestamp;
+
+  private Double lower_threshold;
 
   public int getId() {
     return id;
@@ -67,5 +76,15 @@ public class SampleDTO {
 
   public void setTimestamp(Instant timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public Double getLower_threshold()
+  {
+    return lower_threshold;
+  }
+
+  public void setLower_threshold(Double lower_threshold)
+  {
+    this.lower_threshold = lower_threshold;
   }
 }

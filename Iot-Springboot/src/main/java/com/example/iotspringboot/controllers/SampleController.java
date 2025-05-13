@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,19 +23,32 @@ public class SampleController
   }
 
   @GetMapping
-  public List<SampleDTO> getSamples(
+  public Map<String, Object> getSamples(
       @RequestParam(name = "from", required = false) Instant from,
       @RequestParam(name = "to", required = false) Instant to) {
+
+    List<SampleDTO> samples;
+
+    // Hent prøverne baseret på parametrene
     if (from != null && to != null) {
-      return sampleService.getSamplesBetweenTimestamps(from, to);
+      samples = sampleService.getSamplesBetweenTimestamps(from, to);
     } else if (from != null) {
-      return sampleService.getSamplesAfterTimestamp(from);
+      samples = sampleService.getSamplesAfterTimestamp(from);
     } else if (to != null) {
-      return sampleService.getSamplesBeforeTimestamp(to);
+      samples = sampleService.getSamplesBeforeTimestamp(to);
     } else {
-      return sampleService.getAllSamples();
+      samples = sampleService.getAllSamples();
     }
+
+    // Bygger JSON-struktur med "SampleDTO"-wrapper
+    List<Map<String, SampleDTO>> wrappedSamples = samples.stream()
+        .map(sample -> Map.of("SampleDTO", sample))
+        .toList();
+
+    // Returnerer JSON i ønsket format
+    return Map.of("response", Map.of("list", wrappedSamples));
   }
+
 
   @PostMapping public SampleDTO createSample(@RequestBody SampleDTO sampleDTO)
   {

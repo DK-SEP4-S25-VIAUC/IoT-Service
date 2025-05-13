@@ -13,6 +13,7 @@ public class SampleMapper
     dto.setAirTemperature(sample.getAirTemperature());
     dto.setLightValue(sample.getLightValue());
     dto.setTimestamp(sample.getTimeStamp());
+    dto.setLower_threshold(sample.getLower_threshold());
     return dto;
   }
 
@@ -24,6 +25,7 @@ public class SampleMapper
     sample.setAirTemperature(dto.getAirTemperature());
     sample.setLightValue(dto.getLightValue());
     sample.setTimeStamp(dto.getTimestamp());
+    sample.setLower_threshold(dto.getLower_threshold());
     return sample;
   }
 }
