@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/watering/mode")
+@RequestMapping("/water/mode")
 public class WateringModeController {
 
   private final WateringModeService service;

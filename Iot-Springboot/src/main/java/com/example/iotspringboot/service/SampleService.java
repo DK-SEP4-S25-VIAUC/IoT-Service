@@ -131,7 +131,6 @@ public class SampleService
       Water waterLog = new Water();
       waterLog.setWateredAmount(ml);
       waterLog.setTimeStamp(Instant.now());
-      waterLog.setWaterLevel(null); // 👈 vi lader water_level være NULL
 
       waterRepository.save(waterLog);
 
