@@ -33,10 +33,17 @@ public class WateringModeService {
   }
 
   public WateringModeDTO setMode(WateringModeDTO dto) {
-    WateringMode m = repository.findById(1L).orElse(new WateringMode());
-    m.setId(1L);
-    m.setAutomaticWatering(dto.isAutomaticWatering());
-    repository.save(m);
+    WateringMode wateringMode = repository.findById(1L).orElse(null);
+
+    if (wateringMode == null) {
+      wateringMode = new WateringMode();
+      wateringMode.setAutomaticWatering(dto.isAutomaticWatering());
+    } else {
+      wateringMode.setAutomaticWatering(dto.isAutomaticWatering());
+    }
+
+    repository.save(wateringMode);
     return dto;
   }
+
 }
