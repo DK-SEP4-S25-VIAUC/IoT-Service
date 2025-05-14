@@ -41,7 +41,7 @@ public class WaterController
   public ResponseEntity<?> addWateringActivity(@RequestBody WaterDTO waterDTO)
   {
     try{
-      String tcpURL = "http://4.208.23.45:8081/sendToEsp";
+      String tcpURL = "http://4.207.72.20:8081/sendToEsp";
       String tcpPayload = String.format("{\"cmd\": \"water\", \"ml\": %.2f}", waterDTO.getWatered_amount());
 
       RestTemplate restTemplate = new RestTemplate();
