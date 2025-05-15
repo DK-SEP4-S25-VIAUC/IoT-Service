@@ -1,5 +1,6 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.AirHumidityDTO;
 import com.example.iotspringboot.dto.WaterDTO;
 import com.example.iotspringboot.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 @RestController @RequestMapping("/water")
 public class WaterController
@@ -23,13 +26,43 @@ public class WaterController
   }
 
   @GetMapping("/latest")
-  public WaterDTO getLatestWaterReading() {
-    return waterService.getLatestWaterReading();
+  public Map<String, Object> getLatestWaterReading() {
+
+    WaterDTO value = waterService.getLatestWaterReading();
+
+    return Map.of("WaterDTO", value);
   }
 
   @GetMapping
-  public List<WaterDTO> getAllWaterReadings() {
-    return waterService.getAllWaters();
+  public Map<String, Object> getAllWaterReadings(
+      @RequestParam(value = "from", required = false) Instant from,
+      @RequestParam(value = "to", required = false) Instant to) {
+
+    List<WaterDTO> values;
+
+    // Hent mellem tidsstempler, hvis begge parametre er til stede
+    if (from != null && to != null) {
+      values = waterService.getWaterReadingsBetweenTimestamps(from, to);
+    }
+
+    // Hent fra `from` og fremad, hvis kun `from` er angivet
+    else if (from != null) {
+      values = waterService.getWaterReadingsAfterTimestamp(from);
+    }
+
+    // Hent indtil `to`, hvis kun `to` er angivet
+    else if (to != null) {
+      values = waterService.getWaterReadingsBeforeTimestamp(to);
+    }
+    // hent alle målinger, hvis ingen parametre er angivet
+    else
+    {
+      values = waterService.getAllWaters();
+    }
+    List<Map<String, WaterDTO>> wrappedValues = values.stream()
+        .map(dto -> Map.of("WaterDTO", dto))
+        .toList();
+    return Map.of("list", wrappedValues);
   }
 
   @PostMapping("/manual") public WaterDTO addManualWater(@RequestBody WaterDTO waterDTO)
