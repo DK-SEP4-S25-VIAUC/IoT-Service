@@ -65,9 +65,14 @@ public class WaterController
     return Map.of("list", wrappedValues);
   }
 
-  @PostMapping("/manual") public WaterDTO addManualWater(@RequestBody WaterDTO waterDTO)
+  @PostMapping("/manual") public ResponseEntity<?> addManualWater(@RequestBody WaterDTO waterDTO)
   {
-    return waterService.addWater(waterDTO);
+    try {
+      WaterDTO saved = waterService.addWater(waterDTO);
+      return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+    }
   }
 
   @PostMapping
