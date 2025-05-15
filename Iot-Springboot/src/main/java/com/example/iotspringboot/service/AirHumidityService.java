@@ -20,12 +20,28 @@ public class AirHumidityService
     this.airHumidityRepository = airHumidityRepository;
   }
 
+  /*/
   public AirHumidityDTO getLatestAirHumidity() {
     return AirHumidityMapper.toDTO(airHumidityRepository.findTopByOrderByTimeStampDesc());
   }
+/*/
 
   public List<AirHumidityDTO> getAllAirHumidities() {
     return airHumidityRepository.findAll().stream().map(AirHumidityMapper::toDTO).collect(
         Collectors.toList());
   }
+
+  // null check, for at komme igennem testen.
+  public AirHumidityDTO getLatestAirHumidity() {
+    AirHumidity latest = airHumidityRepository.findTopByOrderByTimeStampDesc();
+    if (latest == null) {
+      return null;
+    }
+    return AirHumidityMapper.toDTO(latest);
+  }
+
+
+
+
+
 }

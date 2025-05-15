@@ -1,100 +1,118 @@
 package com.example.iotspringboot.SoilHumidityControllerTest;
 
 import com.example.iotspringboot.controllers.SoilHumidityController;
+import com.example.iotspringboot.dto.CreateManualThresholdDTO;
 import com.example.iotspringboot.dto.CreateSoilHumidityDTO;
 import com.example.iotspringboot.dto.SoilHumidityDTO;
+import com.example.iotspringboot.service.ManualThresholdService;
 import com.example.iotspringboot.service.SoilHumidityService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+public class SoilHumidityControllerTest {
 
-@WebMvcTest(SoilHumidityController.class)
-@Import(SoilHumidityControllerTest.MockConfig.class)
-class SoilHumidityControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
     private SoilHumidityService soilHumidityService;
+    private ManualThresholdService manualThresholdService;
+    private SoilHumidityController controller;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Configuration
-    static class MockConfig {
-        @Bean
-        public SoilHumidityService soilHumidityService() {
-            return Mockito.mock(SoilHumidityService.class);
-        }
+    @BeforeEach
+    public void setUp() {
+        soilHumidityService = Mockito.mock(SoilHumidityService.class);
+        manualThresholdService = Mockito.mock(ManualThresholdService.class);
+        controller = new SoilHumidityController(soilHumidityService, manualThresholdService);
     }
 
     @Test
-    void testGetLatestSoilHumidity() throws Exception {
+    public void testGetLatestSoilHumidity() {
         SoilHumidityDTO dto = new SoilHumidityDTO();
         dto.setId(1);
-        dto.setSoil_humidity_value(40.5);
+        dto.setSoil_humidity_value(45.0);
         dto.setTime_stamp(ZonedDateTime.now());
 
         when(soilHumidityService.getLatestSoilHumidity()).thenReturn(dto);
 
-        mockMvc.perform(get("/soilhumidity/latest"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(Optional.of(dto.getId())))
-                .andExpect(jsonPath("$.soil_humidity_value").value(Optional.of(dto.getSoil_humidity_value())));
+        SoilHumidityDTO result = controller.getLatestSoilHumidity();
+        assertEquals(45.0, result.getSoil_humidity_value());
+        verify(soilHumidityService, times(1)).getLatestSoilHumidity();
     }
 
     @Test
-    void testGetAllSoilHumidityReadings() throws Exception {
-        SoilHumidityDTO dto1 = new SoilHumidityDTO();
-        dto1.setId(1);
-        dto1.setSoil_humidity_value(32.0);
-        dto1.setTime_stamp(ZonedDateTime.now());
+    public void testGetAllSoilHumidities_NoParams() {
+        SoilHumidityDTO dto = new SoilHumidityDTO();
+        dto.setId(1);
+        dto.setSoil_humidity_value(33.0);
 
-        SoilHumidityDTO dto2 = new SoilHumidityDTO();
-        dto2.setId(2);
-        dto2.setSoil_humidity_value(45.0);
-        dto2.setTime_stamp(ZonedDateTime.now());
+        when(soilHumidityService.getAllSoilHumidities()).thenReturn(List.of(dto));
 
-        when(soilHumidityService.getAllSoilHumidities()).thenReturn(List.of(dto1, dto2));
-
-        mockMvc.perform(get("/soilhumidity"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(Optional.of(2)));
+        List<SoilHumidityDTO> result = controller.getSoilHumidity(null, null);
+        assertEquals(1, result.size());
+        verify(soilHumidityService, times(1)).getAllSoilHumidities();
     }
 
     @Test
-    void testSaveSoilHumidity() throws Exception {
-        CreateSoilHumidityDTO input = new CreateSoilHumidityDTO();
-        input.setSoil_humidity_value(55.5);
+    public void testGetSoilHumidity_FromTo() {
+        Instant from = Instant.now().minusSeconds(3600);
+        Instant to = Instant.now();
 
-        SoilHumidityDTO output = new SoilHumidityDTO();
-        output.setId(3);
-        output.setSoil_humidity_value(55.5);
-        output.setTime_stamp(ZonedDateTime.now());
+        SoilHumidityDTO dto = new SoilHumidityDTO();
+        dto.setSoil_humidity_value(55.5);
 
-        when(soilHumidityService.saveSoilHumidity(input)).thenReturn(output);
+        when(soilHumidityService.getSoilHumiditiesBetweenTimestamps(from, to)).thenReturn(List.of(dto));
 
-        mockMvc.perform(post("/soilhumidity")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(input)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.soil_humidity_value").value(Optional.of(55.5)));
+        List<SoilHumidityDTO> result = controller.getSoilHumidity(from, to);
+        assertEquals(1, result.size());
+        verify(soilHumidityService, times(1)).getSoilHumiditiesBetweenTimestamps(from, to);
+    }
+
+    @Test
+    public void testSaveSoilHumidity() {
+        CreateSoilHumidityDTO request = new CreateSoilHumidityDTO();
+        request.setSoil_humidity_value(65.5);
+
+        SoilHumidityDTO response = new SoilHumidityDTO();
+        response.setId(1);
+        response.setSoil_humidity_value(65.5);
+
+        when(soilHumidityService.saveSoilHumidity(request)).thenReturn(response);
+
+        SoilHumidityDTO result = controller.saveSoilHumidity(request);
+        assertEquals(65.5, result.getSoil_humidity_value());
+        verify(soilHumidityService, times(1)).saveSoilHumidity(request);
+    }
+
+    @Test
+    public void testSetSoilHumidityThreshold() {
+        CreateManualThresholdDTO input = new CreateManualThresholdDTO();
+        input.setLowerbound(20);
+        input.setUpperbound(80);
+
+        when(manualThresholdService.setThreshold(input)).thenReturn(input);
+
+        CreateManualThresholdDTO result = controller.setSoilHumidityThreshold(input);
+        assertEquals(20, result.getLowerbound());
+        assertEquals(80, result.getUpperbound());
+        verify(manualThresholdService, times(1)).setThreshold(input);
+    }
+
+    @Test
+    public void testGetSoilHumidityThreshold() {
+        CreateManualThresholdDTO threshold = new CreateManualThresholdDTO();
+        threshold.setLowerbound(10);
+        threshold.setUpperbound(70);
+
+        when(manualThresholdService.getThreshold()).thenReturn(threshold);
+
+        CreateManualThresholdDTO result = controller.getSoilHumidityThreshold();
+        assertEquals(10, result.getLowerbound());
+        assertEquals(70, result.getUpperbound());
+        verify(manualThresholdService, times(1)).getThreshold();
     }
 }

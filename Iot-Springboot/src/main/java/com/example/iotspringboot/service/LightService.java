@@ -20,13 +20,23 @@ public class LightService
     this.lightRepository = lightRepository;
   }
 
-  public LightDTO getLatestLightReading() {
+  /*/ public LightDTO getLatestLightReading() {
     return LightMapper.toDTO(lightRepository.findTopByOrderByTimeStampDesc());
   }
-
+/*/
   public List<LightDTO> getAllLights() {
     return lightRepository.findAll().stream().map(LightMapper::toDTO).collect(
         Collectors.toList());
   }
+
+  //krav for at få testen passed.
+  public LightDTO getLatestLightReading() {
+    Light latestLight = lightRepository.findTopByOrderByTimeStampDesc();
+    if (latestLight == null) {
+      return null;
+    }
+    return LightMapper.toDTO(latestLight);
+  }
+
 
 }
