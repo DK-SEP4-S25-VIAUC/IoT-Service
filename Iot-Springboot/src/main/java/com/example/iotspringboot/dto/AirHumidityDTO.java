@@ -1,11 +1,22 @@
 package com.example.iotspringboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.Instant;
+@JsonPropertyOrder(
+    {
+        "id", "time_stamp", "air_humidity_value"
+    }
+    )
 
 public class AirHumidityDTO
 {
+  @JsonProperty("id")
   private int id;
+  @JsonProperty("time_stamp")
   private Instant time_stamp;
+  @JsonProperty("air_humidity_value")
   private double air_humidity_value;
 
   public int getId()

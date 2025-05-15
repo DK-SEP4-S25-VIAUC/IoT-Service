@@ -46,7 +46,7 @@ public class SampleController
         .toList();
 
     // Returnerer JSON i ønsket format
-    return Map.of("response", Map.of("list", wrappedSamples));
+    return Map.of("list", wrappedSamples);
   }
 
 
