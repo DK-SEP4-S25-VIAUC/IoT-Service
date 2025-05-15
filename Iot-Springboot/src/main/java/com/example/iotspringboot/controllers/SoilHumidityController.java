@@ -1,9 +1,6 @@
 package com.example.iotspringboot.controllers;
 
-import com.example.iotspringboot.dto.AirHumidityDTO;
-import com.example.iotspringboot.dto.CreateManualThresholdDTO;
-import com.example.iotspringboot.dto.CreateSoilHumidityDTO;
-import com.example.iotspringboot.dto.SoilHumidityDTO;
+import com.example.iotspringboot.dto.*;
 import com.example.iotspringboot.service.ManualThresholdService;
 import com.example.iotspringboot.service.SoilHumidityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,13 +76,14 @@ public class SoilHumidityController
   // TODO: Make a post endpoint threshold
 
   @PostMapping("/threshold")
-  public CreateManualThresholdDTO setSoilHumidityThreshold(@RequestBody CreateManualThresholdDTO dto) {
-    return manualThresholdService.setThreshold(dto);
+  public Map<String, Object> setSoilHumidityThreshold(@RequestBody CreateManualThresholdDTORequest wrapper) {
+     CreateManualThresholdDTO dto = wrapper.getDto();
+    return Map.of("CreateManualThresholdDTO", manualThresholdService.setThreshold(dto));
   }
 
   @GetMapping("/threshold")
-  public CreateManualThresholdDTO getSoilHumidityThreshold()
+  public Map<String, Object> getSoilHumidityThreshold()
   {
-    return manualThresholdService.getThreshold();
+    return Map.of("ThresholdSoilHumidity", manualThresholdService.getThreshold());
   }
 }

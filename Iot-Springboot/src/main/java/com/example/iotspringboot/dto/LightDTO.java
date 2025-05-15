@@ -20,31 +20,37 @@ public class LightDTO
   @JsonProperty("light_value")
   private double light_value;
 
+  @JsonProperty("id")
   public int getId()
   {
     return id;
   }
 
+  @JsonProperty("id")
   public void setId(int id)
   {
     this.id = id;
   }
 
+  @JsonProperty("time_stamp")
   public Instant getTime_stamp()
   {
     return time_stamp;
   }
 
+  @JsonProperty("time_stamp")
   public void setTime_stamp(Instant time_stamp)
   {
     this.time_stamp = time_stamp;
   }
 
+  @JsonProperty("light_value")
   public double getLight_value()
   {
     return light_value;
   }
 
+  @JsonProperty("light_value")
   public void setLight_value(double light_value)
   {
     this.light_value = light_value;
