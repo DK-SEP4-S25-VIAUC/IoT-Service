@@ -7,6 +7,7 @@ import com.example.iotspringboot.repository.WaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,5 +28,16 @@ public class WaterService
   public List<WaterDTO> getAllWaters() {
     return waterRepository.findAll().stream().map(WaterMapper::toDTO).collect(
         Collectors.toList());
+  }
+
+  public WaterDTO addWater(WaterDTO waterDTO)
+  {
+    Water entity = new Water();
+    entity.setWateredAmount(waterDTO.getWatered_amount());
+    entity.getWaterLevel();
+    entity.setTimeStamp(Instant.now());
+
+    Water saved = waterRepository.save(entity);
+    return WaterMapper.toDTO(saved);
   }
 }
