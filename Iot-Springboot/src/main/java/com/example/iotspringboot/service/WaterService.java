@@ -36,18 +36,21 @@ public class WaterService
   public WaterDTO addWater(WaterDTO waterDTO)
   {
     Water entity = new Water();
+    Double wateredAmount = waterDTO.getWatered_amount() == null ? 0.0 : waterDTO.getWatered_amount();
 
-    // Kun sæt værdier, hvis de er til stede
-    if (waterDTO.getWatered_amount() == null) {
-      entity.setWateredAmount(0.0);
-    } else {
-      entity.setWateredAmount(waterDTO.getWatered_amount());
+    // Check if watered amount is valid
+    if (wateredAmount < 0) {
+      throw new IllegalArgumentException("Watered amount must be positive");
+    }
+    if (wateredAmount > 1000) {
+      throw new IllegalArgumentException("Watered amount must be less than 1000 ml");
     }
 
-    if (waterDTO.getWater_level() != null) {
-      entity.setWaterLevel(waterDTO.getWater_level());
+    entity.setWateredAmount(wateredAmount);
+    if (waterDTO.getWater_level() != null && waterDTO.getWater_level() < 0) {
+      throw new IllegalArgumentException("Water level must be >= 0");
     }
-
+    entity.setWaterLevel(waterDTO.getWater_level());
     entity.setTimeStamp(Instant.now());
 
     Water saved = waterRepository.save(entity);
