@@ -1,5 +1,6 @@
 package com.example.iotspringboot.controllers;
 
+import com.example.iotspringboot.dto.AirHumidityDTO;
 import com.example.iotspringboot.dto.CreateManualThresholdDTO;
 import com.example.iotspringboot.dto.CreateSoilHumidityDTO;
 import com.example.iotspringboot.dto.SoilHumidityDTO;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 @RestController @RequestMapping("/soilhumidity")
 public class SoilHumidityController
@@ -25,32 +27,44 @@ public class SoilHumidityController
   }
 
   @GetMapping("/latest")
-  public SoilHumidityDTO getLatestSoilHumidity() {
-    return soilHumidityService.getLatestSoilHumidity();
+  public Map<String, Object> getLatestSoilHumidity() {
+    SoilHumidityDTO value = soilHumidityService.getLatestSoilHumidity();
+    return Map.of("SoilHumidityDTO", value);
   }
 
   @GetMapping
-  public List<SoilHumidityDTO> getSoilHumidity(
+  public Map<String, Object> getSoilHumidity(
       @RequestParam(value = "from", required = false) Instant from,
       @RequestParam(value = "to", required = false) Instant to) {
 
+    List<SoilHumidityDTO> values;
+
     // Hent mellem tidsstempler, hvis begge parametre er til stede
     if (from != null && to != null) {
-      return soilHumidityService.getSoilHumiditiesBetweenTimestamps(from, to);
+      values = soilHumidityService.getSoilHumiditiesBetweenTimestamps(from, to);
     }
 
     // Hent fra `from` og fremad, hvis kun `from` er angivet
-    if (from != null) {
-      return soilHumidityService.getSoilHumidityAfterTimestamp(from);
+    else if (from != null) {
+      values = soilHumidityService.getSoilHumidityAfterTimestamp(from);
     }
 
     // Hent indtil `to`, hvis kun `to` er angivet
-    if (to != null) {
-      return soilHumidityService.getSoilHumidityBeforeTimestamp(to);
+    else if (to != null) {
+      values = soilHumidityService.getSoilHumidityBeforeTimestamp(to);
+    }
+    // hent alle målinger, hvis ingen parametre er angivet
+    else
+    {
+      values = soilHumidityService.getAllSoilHumidities();
     }
 
-    // Returnér alle målinger, hvis ingen parametre er angivet
-    return soilHumidityService.getAllSoilHumidities();
+    List<Map<String, SoilHumidityDTO>> wrappedValues = values.stream()
+        .map(dto -> Map.of("SoilHumidityDTO", dto))
+        .toList();
+
+    return Map.of("list", wrappedValues);
+
   }
 
 
