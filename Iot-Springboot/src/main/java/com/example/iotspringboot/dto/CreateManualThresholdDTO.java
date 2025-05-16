@@ -16,21 +16,25 @@ public class CreateManualThresholdDTO
   @JsonProperty("upperbound")
   private double upperbound;
 
+  @JsonProperty("upperbound")
   public double getUpperbound()
   {
     return upperbound;
   }
 
+  @JsonProperty("upperbound")
   public void setUpperbound(double upperbound)
   {
     this.upperbound = upperbound;
   }
 
+  @JsonProperty("lowerbound")
   public double getLowerbound()
   {
     return lowerbound;
   }
 
+  @JsonProperty("lowerbound")
   public void setLowerbound(double lowerbound)
   {
     this.lowerbound = lowerbound;
