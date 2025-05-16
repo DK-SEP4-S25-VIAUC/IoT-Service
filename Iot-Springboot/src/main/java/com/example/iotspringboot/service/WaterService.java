@@ -33,29 +33,38 @@ public class WaterService
         Collectors.toList());
   }
 
-  public WaterDTO addWater(WaterDTO waterDTO)
-  {
+  public WaterDTO addWaterAmount(WaterDTO waterDTO) {
     Water entity = new Water();
     Double wateredAmount = waterDTO.getWatered_amount() == null ? 0.0 : waterDTO.getWatered_amount();
 
-    // Check if watered amount is valid
-    if (wateredAmount < 0) {
-      throw new IllegalArgumentException("Watered amount must be positive");
-    }
-    if (wateredAmount > 1000) {
-      throw new IllegalArgumentException("Watered amount must be less than 1000 ml");
+    if (wateredAmount < 0 || wateredAmount > 1000) {
+      throw new IllegalArgumentException("Watered amount must be between 0 and 1000 ml.");
     }
 
     entity.setWateredAmount(wateredAmount);
-    if (waterDTO.getWater_level() != null && waterDTO.getWater_level() < 0) {
-      throw new IllegalArgumentException("Water level must be >= 0");
-    }
-    entity.setWaterLevel(waterDTO.getWater_level());
+    entity.setWaterLevel(null); // explicitly null
     entity.setTimeStamp(Instant.now());
 
     Water saved = waterRepository.save(entity);
     return WaterMapper.toDTO(saved);
   }
+
+  public WaterDTO addWaterLevel(WaterDTO waterDTO) {
+    Water entity = new Water();
+    Double waterLevel = waterDTO.getWater_level();
+
+    if (waterLevel != null && waterLevel < 0) {
+      throw new IllegalArgumentException("Water level must be >= 0");
+    }
+
+    entity.setWaterLevel(waterLevel);
+    entity.setWateredAmount(0.0); // explicitly 0
+    entity.setTimeStamp(Instant.now());
+
+    Water saved = waterRepository.save(entity);
+    return WaterMapper.toDTO(saved);
+  }
+
 
   public List<WaterDTO> getWaterReadingsBetweenTimestamps(Instant from,
       Instant to)

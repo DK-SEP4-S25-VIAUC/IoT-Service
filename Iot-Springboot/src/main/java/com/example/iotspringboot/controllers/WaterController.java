@@ -68,7 +68,25 @@ public class WaterController
   @PostMapping("/manual") public ResponseEntity<?> addManualWater(@RequestBody WaterDTO waterDTO)
   {
     try {
-      WaterDTO saved = waterService.addWater(waterDTO);
+      if (waterDTO.getWatered_amount() == null || waterDTO.getWater_level() != null) {
+        throw new IllegalArgumentException("Only 'watered_amount' is allowed for this endpoint.");
+      }
+
+      WaterDTO saved = waterService.addWaterAmount(waterDTO);
+      return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+    }
+  }
+
+  @PostMapping("/waterlevel")
+  public ResponseEntity<?> addWaterLevel(@RequestBody WaterDTO waterDTO) {
+    try {
+      if (waterDTO.getWater_level() == null || waterDTO.getWatered_amount() != null) {
+        throw new IllegalArgumentException("Only 'water_level' is allowed for this endpoint.");
+      }
+
+      WaterDTO saved = waterService.addWaterLevel(waterDTO);
       return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     } catch (IllegalArgumentException e) {
       return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
@@ -94,7 +112,7 @@ public class WaterController
         return ResponseEntity.badRequest().body("Error: " + response.getStatusCode());
       }
 
-      waterService.addWater(waterDTO);
+      waterService.addWaterAmount(waterDTO);
       return ResponseEntity.status(HttpStatus.CREATED).body(waterDTO);
     }
     catch (Exception e){
