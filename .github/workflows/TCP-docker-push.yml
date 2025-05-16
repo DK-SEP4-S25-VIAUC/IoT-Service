@@ -27,7 +27,7 @@ jobs:
         working-directory: TCPSocketServer
 
       - name: Build and package TCPServer with Maven
-        run: ./mvnw clean package -DskipTests
+        run: ./mvnw clean package
         working-directory: TCPSocketServer
 
       - name: Login to Docker Hub
