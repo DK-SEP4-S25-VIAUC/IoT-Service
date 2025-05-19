@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,11 +26,13 @@ class TemperatureControllerTest {
 
         when(temperatureService.getLatestTemperature()).thenReturn(dto);
 
-        TemperatureDTO result = controller.getLatestTemperature(); // <-- rettet her
+        Map<String, Object> result = controller.getLatestTemperature();
+        TemperatureDTO actual = (TemperatureDTO) result.get("TemperatureDTO");
 
-        assertEquals(1, result.getId());
-        assertEquals(22.0, result.getTemperature_value());
+        assertEquals(1, actual.getId());
+        assertEquals(22.0, actual.getTemperature_value());
     }
+
 
     @Test
     void getAllTemperatureReadings_returnsListOfDTOs() {
@@ -43,11 +46,22 @@ class TemperatureControllerTest {
         dto2.setTemperature_value(22.5);
         dto2.setTime_stamp(Instant.now());
 
-        when(temperatureService.getAllTemperatures()).thenReturn(List.of(dto1, dto2));
+        Instant from = Instant.now().minusSeconds(3600);
+        Instant to = Instant.now();
 
-        List<TemperatureDTO> result = controller.getAllTemperatureReadings();
+        when(temperatureService.getTemperaturesBetweenTimestamps(from, to)).thenReturn(List.of(dto1, dto2));
 
-        assertEquals(2, result.size());
-        assertEquals(22.5, result.get(1).getTemperature_value());
+        Map<String, Object> result = controller.getAllTemperatureReadings(from, to);
+
+        @SuppressWarnings("unchecked")
+        List<Map<String, Object>> list = (List<Map<String, Object>>) result.get("list");
+
+        assertEquals(2, list.size());
+
+        TemperatureDTO extracted = (TemperatureDTO) list.get(1).get("TemperatureDTO");
+        assertEquals(22.5, extracted.getTemperature_value());
     }
+
+
+
 }
