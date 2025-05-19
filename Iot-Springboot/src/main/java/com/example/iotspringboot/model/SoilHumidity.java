@@ -12,9 +12,10 @@ public class SoilHumidity
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "soil_humidity_value")
   private double soilHumidityValue;
 
-  @Column(nullable = false)
+  @Column(name = "time_stamp", nullable = false)
   private Instant timeStamp;
 
   public int getId()

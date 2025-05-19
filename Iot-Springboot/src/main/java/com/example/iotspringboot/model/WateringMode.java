@@ -9,6 +9,7 @@ public class WateringMode {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "automatic_watering")
   private boolean automaticWatering;
 
   public int getId() {

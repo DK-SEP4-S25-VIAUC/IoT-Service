@@ -38,34 +38,42 @@ public class SampleDTO {
     this.id = id;
   }
 
+  @JsonProperty("soil_humidity")
   public Double getSoilHumidity() {
     return soilHumidity;
   }
 
+  @JsonProperty("soil_humidity")
   public void setSoilHumidity(Double soilHumidity) {
     this.soilHumidity = soilHumidity;
   }
 
+  @JsonProperty("air_humidity")
   public Double getAirHumidity() {
     return airHumidity;
   }
 
+  @JsonProperty("air_humidity")
   public void setAirHumidity(Double airHumidity) {
     this.airHumidity = airHumidity;
   }
 
+  @JsonProperty("air_temperature")
   public Double getAirTemperature() {
     return airTemperature;
   }
 
+  @JsonProperty("air_temperature")
   public void setAirTemperature(Double airTemperature) {
     this.airTemperature = airTemperature;
   }
 
+  @JsonProperty("light_value")
   public Double getLightValue() {
     return lightValue;
   }
 
+  @JsonProperty("light_value")
   public void setLightValue(Double lightValue) {
     this.lightValue = lightValue;
   }

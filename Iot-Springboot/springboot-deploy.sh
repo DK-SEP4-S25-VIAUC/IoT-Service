@@ -17,19 +17,19 @@ RESOURCE_GROUP=SEP4
 IMAGE=alperen941/iot-springboot:$TAG
 
 echo ""
-echo "🚀 Deployer image: $IMAGE"
-echo "📦 Container App: $APP_NAME"
-echo "📂 Resource Group: $RESOURCE_GROUP"
+echo "Deployer image: $IMAGE"
+echo "Container App: $APP_NAME"
+echo "Resource Group: $RESOURCE_GROUP"
 echo ""
 
-# ✅ Sørg for du er logget ind i Azure CLI
+# Sørg for du er logget ind i Azure CLI
 az account show > /dev/null 2>&1 || az login
 
-# 🔄 Udfør deploy
+# Udfør deploy
 az containerapp update \
   --name $APP_NAME \
   --resource-group $RESOURCE_GROUP \
   --image $IMAGE
 
 echo ""
-echo "✅ Deploy færdig!"
+echo "Deploy færdig!"
