@@ -26,8 +26,12 @@ public class SoilHumidityService
   }
 
   public SoilHumidityDTO getLatestSoilHumidity() {
-    return SoilHumidityMapper.toDTO(soilHumidityRepository.findTopByOrderByTimeStampDesc());
-  }
+
+    SoilHumidity entity = soilHumidityRepository.findTopByOrderByTimeStampDesc();
+    if (entity == null) {
+      return null;
+    }
+    return SoilHumidityMapper.toDTO(entity);  }
 
   public List<SoilHumidityDTO> getAllSoilHumidities() {
     return soilHumidityRepository.findAll().stream().map(SoilHumidityMapper::toDTO).collect(
