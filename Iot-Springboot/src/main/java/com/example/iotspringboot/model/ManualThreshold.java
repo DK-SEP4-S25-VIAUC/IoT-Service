@@ -1,9 +1,6 @@
 package com.example.iotspringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ManualThreshold
@@ -12,7 +9,9 @@ public class ManualThreshold
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "lowerbound")
   private double lowerbound;
+  @Column(name = "upperbound")
   private double upperbound;
 
   public int getId()

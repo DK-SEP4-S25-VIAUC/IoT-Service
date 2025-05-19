@@ -113,7 +113,7 @@ public class SampleService
   }
 
   private void sendWaterCommand(int ml) {
-    String url = "http://4.208.23.45:8081/sendToEsp";
+    String url = "http://4.207.72.20:8081/sendToEsp";
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -131,7 +131,6 @@ public class SampleService
       Water waterLog = new Water();
       waterLog.setWateredAmount(ml);
       waterLog.setTimeStamp(Instant.now());
-      waterLog.setWaterLevel(null); // 👈 vi lader water_level være NULL
 
       waterRepository.save(waterLog);
 

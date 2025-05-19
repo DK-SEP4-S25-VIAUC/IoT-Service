@@ -12,11 +12,13 @@ public class TCPServerApplication {
     MessageBuffer buffer = new MessageBuffer();
     HttpForwarder forwarder = new HttpForwarder();
 
+    //start tcp serveren
     new Thread(() -> {
       TCPServer tcpServer = new TCPServer(5000, forwarder, buffer);
       tcpServer.start();
     }).start();
 
+    //start httpserveren
     HttpControlServer controlServer = new HttpControlServer(8081, buffer);
     controlServer.start();
   }

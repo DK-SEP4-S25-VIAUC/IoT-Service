@@ -22,7 +22,7 @@ public class WateringModeService {
     Optional<WateringMode> mode = repository.findById(1L);
     WateringMode m = mode.orElseGet(() -> {
       WateringMode newMode = new WateringMode();
-      newMode.setId(1L);
+      newMode.setId((int) 1);
       newMode.setAutomaticWatering(false);
       return repository.save(newMode);
     });

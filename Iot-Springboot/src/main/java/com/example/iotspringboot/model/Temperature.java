@@ -1,5 +1,6 @@
 package com.example.iotspringboot.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -14,7 +15,10 @@ public class Temperature
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "time_stamp")
   private Instant timeStamp;
+
+  @Column(name = "temperature_value")
   private double temperatureValue;
 
   public int getId()
